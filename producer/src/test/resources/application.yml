@@ -1,0 +1,8 @@
+server:
+  port: 8080
+  context-path: /publish-events
+
+spring:
+  main:
+    lazy-initialization: true
+  profiles: test

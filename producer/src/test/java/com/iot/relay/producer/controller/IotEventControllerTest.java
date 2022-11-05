@@ -8,15 +8,21 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import com.iot.relay.producer.ProducerApplication;
+import com.iot.relay.producer.config.WebSecurityConfigForTest;
 import com.iot.relay.producer.controller.request.IotEventRequest;
 import com.iot.relay.producer.service.IotEventService;
 
@@ -25,11 +31,21 @@ import reactor.core.publisher.ParallelFlux;
 
 @ExtendWith(SpringExtension.class)
 @WebFluxTest(IotEventController.class)
+@ActiveProfiles("test")
+@ContextConfiguration(classes = {ProducerApplication.class, WebSecurityConfigForTest.class})
 public class IotEventControllerTest {
     @Autowired
     private WebTestClient webTestClient;
     @MockBean
     private IotEventService iotEventService;
+
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @BeforeEach
+    void setUp() {
+        webTestClient = WebTestClient.bindToApplicationContext(applicationContext).configureClient().build();
+    }
     
     @Test
     void testPublishEvents() {
