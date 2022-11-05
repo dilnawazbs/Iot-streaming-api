@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 /**
  * Controller to create new user and create jwt token
  * 
- * @author Ananthan Periyasamy
+ * @author dilnawazan sayyad
  */
 @RestController
 @CrossOrigin
