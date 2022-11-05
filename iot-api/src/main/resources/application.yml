@@ -1,0 +1,15 @@
+server:
+  port: '8082'
+jwt:
+  secret: relaysecretcode
+  get:
+    token:
+      uri: /authenticate
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    mongodb:
+      host: localhost
+      port: '27017'
+      database: iot

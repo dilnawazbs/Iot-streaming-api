@@ -1,0 +1,58 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: '27017'
+      database: iot
+  cloud:
+    stream:
+      function:
+        definition: iotdata
+      bindings:
+        iotdata-in-0:
+          destination: iot-data
+      kafka:
+        streams:
+          binder:
+            functions:
+              iotdata:
+                applicationId: iotdata
+        binder:
+          brokers: 'localhost:9092, localhost:9094,  localhost:9095'
+          consumer-properties:
+            client:
+              id: consumer-stream
+  kafka:
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    producer:
+      properties:
+        spring:
+          json:
+            add:
+              type:
+                headers: false
+server:
+  port: '8081'
+logging:
+  level:
+    root: INFO
+    com:
+      iot:
+        relay:
+          consumer: INFO
+    org:
+      springframework:
+        data:
+          mongodb:
+            core:
+              MongoTemplate: INFO
+  pattern:
+    console: >-
+      '%highlight(<<%-5level>>) %d{dd-MM-yy HH:mm:ss.SSS} [%thread]
+      %cyan(%c{0}.%M) - %msg%n'

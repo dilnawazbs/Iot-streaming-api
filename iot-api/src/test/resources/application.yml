@@ -1,0 +1,5 @@
+security:
+  basic:
+    enabled: false
+jwt:
+  secret: relaysecretcode
