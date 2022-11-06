@@ -37,4 +37,28 @@ Download and start the docker engine.
 - The startDateTime and endDateTime should be in YYYY-MM-DD or YYYY/MM/DD format now.This should be imporoved to support more formats.
 
 # API Documentation
-- [api-docs](https://github.com/dilnawazbs/Iot-streaming-api/tree/main/api-docs) folder holds the API specification for producer and secure webservice in [YAML](https://github.com/dilnawazbs/Iot-streaming-api/tree/main/api-docs) format
+- [api-docs](https://github.com/dilnawazbs/Iot-streaming-api/tree/main/api-docs) folder holds the API specification for producer and secure webservice in [YAML](https://github.com/dilnawazbs/Iot-streaming-api/tree/main/api-docs) format.
+
+## Event Producer
+Link to API specification in [YAML](https://github.com/dilnawazbs/Iot-streaming-api/blob/main/api-docs/producer-open-api.yaml) format.
+
+<img width="1076" alt="Screenshot 2022-11-06 at 20 18 12" src="https://user-images.githubusercontent.com/12380793/200193597-076dfc3e-d3ab-4b0b-8d19-b19a6a0fc10f.png">
+
+Sample to Publish the event using producer for living room temperature on every second (heartbeat = 1) with total of 120 events.
+
+```
+curl --location --request POST 'http://localhost:8080/publish-events' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+    {
+        "total": 120,
+        "type": "TEMPERATURE",
+        "heartBeat": 1,
+        "id": 1,
+        "name": "Living Room Temperature",
+        "clusterId": "1"
+    }
+]'
+```
+<img width="968" alt="Screenshot 2022-11-06 at 21 38 22" src="https://user-images.githubusercontent.com/12380793/200193866-d71b036d-f29d-4f52-9e90-d4a6e713c5c8.png">
+
