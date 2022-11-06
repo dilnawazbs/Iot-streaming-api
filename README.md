@@ -100,5 +100,41 @@ curl --location --request POST 'http://localhost:8082/authenticate' \
 ```
 <img width="975" alt="Screenshot 2022-11-06 at 21 55 34" src="https://user-images.githubusercontent.com/12380793/200194710-2341b365-b540-4533-844a-eb26f2ca3211.png">
 
+### Iot Sensor query API
+
 <img width="822" alt="Screenshot 2022-11-06 at 21 46 54" src="https://user-images.githubusercontent.com/12380793/200194461-604e5c56-2432-4e78-ba13-f907d2d90583.png">
 
+Without JWT token could not access any of below APIs, user will get 401 error
+<img width="974" alt="Screenshot 2022-11-06 at 22 00 00" src="https://user-images.githubusercontent.com/12380793/200194884-8f73b2e3-4999-4dc9-bbb9-21f7645d288b.png">
+
+### To find Minimum
+
+```
+curl --location --request GET 'http://localhost:8082/query/min?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=HUMIDITY&clusterId=1'
+--header "Authorization: Bearer << TOKEN FROM AUTHENTICATE API>>"
+```
+<img width="971" alt="Screenshot 2022-11-06 at 22 03 55" src="https://user-images.githubusercontent.com/12380793/200195030-f5b88353-94d7-4333-91e8-e15af3910b16.png">
+
+### To find Maximum
+
+```
+curl --location --request GET 'http://localhost:8082/query/max?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=HUMIDITY&clusterId=1'
+--header "Authorization: Bearer << TOKEN FROM AUTHENTICATE API>>"
+```
+<img width="972" alt="Screenshot 2022-11-06 at 22 05 25" src="https://user-images.githubusercontent.com/12380793/200195097-cd9d29fc-2b54-4871-890a-ee89a32bd536.png">
+
+### To find Median
+
+```
+curl --location --request GET 'http://localhost:8082/query/max?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=HUMIDITY&clusterId=1'
+--header "Authorization: Bearer << TOKEN FROM AUTHENTICATE API>>"
+```
+<img width="976" alt="Screenshot 2022-11-06 at 22 05 52" src="https://user-images.githubusercontent.com/12380793/200195114-d89d3df4-a759-470f-9eed-44e2e8701ea8.png">
+
+### To find Average
+
+```
+curl --location --request GET 'http://localhost:8082/query/max?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=HUMIDITY&clusterId=1'
+--header "Authorization: Bearer << TOKEN FROM AUTHENTICATE API>>"
+```
+<img width="972" alt="Screenshot 2022-11-06 at 22 06 15" src="https://user-images.githubusercontent.com/12380793/200195134-1877a6c1-f39a-4629-a749-a9aa129d548d.png">
