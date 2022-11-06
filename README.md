@@ -69,7 +69,36 @@ Link to API specification in [YAML](https://github.com/dilnawazbs/Iot-streaming-
 
 <img width="824" alt="Screenshot 2022-11-06 at 21 50 14" src="https://user-images.githubusercontent.com/12380793/200194434-e7d7a219-4049-4c6e-ad9e-ab3dbbedac26.png">
 
+### Create/Registor user
+If user account already created then call /authenticate API directly else create a account first. The sample request to create new user
 
+```
+curl --location --request POST 'http://localhost:8082/create/user' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+   {
+    "username": "dilnawaz",
+    "password" : "password"
+ }
+]'
+```
+<img width="972" alt="Screenshot 2022-11-06 at 21 53 59" src="https://user-images.githubusercontent.com/12380793/200194622-63ade7d5-d944-4292-b12d-8dc86d771db3.png">
+
+### Authenticate
+
+Hit authenticate service with user account and passowrd to get JWT token which should be attached in all other request's header. The sample request looks,
+
+```
+curl --location --request POST 'http://localhost:8082/authenticate' \
+--header 'Content-Type: application/json' \
+--data-raw '[
+   {
+    "username": "dilnawaz",
+    "password" : "password"
+ }
+]'
+```
+<img width="975" alt="Screenshot 2022-11-06 at 21 55 34" src="https://user-images.githubusercontent.com/12380793/200194710-2341b365-b540-4533-844a-eb26f2ca3211.png">
 
 <img width="822" alt="Screenshot 2022-11-06 at 21 46 54" src="https://user-images.githubusercontent.com/12380793/200194461-604e5c56-2432-4e78-ba13-f907d2d90583.png">
 
