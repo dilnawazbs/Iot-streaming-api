@@ -1,106 +1,62 @@
-// package com.iot.relay.consumer;
+package com.iot.relay.consumer;
 
-// import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-// import java.util.Map;
-// import java.util.function.Function;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-// import org.apache.kafka.clients.consumer.Consumer;
-// import org.apache.kafka.clients.consumer.ConsumerConfig;
-// import org.apache.kafka.clients.consumer.ConsumerRecord;
-// import org.apache.kafka.common.serialization.StringDeserializer;
-// import org.apache.kafka.common.serialization.StringSerializer;
-// import org.apache.kafka.streams.KeyValue;
-// import org.apache.kafka.streams.kstream.KStream;
-// import org.junit.jupiter.api.AfterEach;
-// import org.junit.jupiter.api.Test;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.boot.SpringApplication;
-// import org.springframework.boot.autoconfigure.SpringBootApplication;
-// import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-// import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-// import org.springframework.boot.test.context.SpringBootTest;
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-// import org.springframework.kafka.core.DefaultKafkaProducerFactory;
-// import org.springframework.kafka.core.KafkaTemplate;
-// import org.springframework.kafka.test.EmbeddedKafkaBroker;
-// import org.springframework.kafka.test.rule.EmbeddedKafkaRule;
-// import org.springframework.kafka.test.utils.KafkaTestUtils;
-// import org.springframework.test.annotation.DirtiesContext;
-// import org.springframework.test.context.event.annotation.BeforeTestClass;
+import org.apache.kafka.clients.consumer.Consumer;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.DefaultKafkaProducerFactory;
+import org.springframework.kafka.test.EmbeddedKafkaBroker;
+import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.kafka.test.utils.KafkaTestUtils;
+import org.springframework.test.context.junit4.SpringRunner;
 
+@RunWith(SpringRunner.class)
+@EmbeddedKafka
+public class IotConsumerTest {
+    private static final String TEST_TOPIC = "iotdata";
 
-// @WebMvcTest
-// @SpringBootTest(classes = { IOTConsumerTest.ExampleAppNotWorkingFunctional.class })
-// @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-// public class IOTConsumerTest {
+    @Autowired
+    EmbeddedKafkaBroker embeddedKafkaBroker;
 
-// 	public static String INPUT_TOPIC = "iotdatain";
-// 	public static String OUTPUT_TOPIC = "iotdataout";
+    @Test
+    public void testReceivingKafkaEvents() {
+        Consumer<Integer, String> consumer = configureConsumer();
+        Producer<Integer, String> producer = configureProducer();
 
-// 	public static EmbeddedKafkaRule embeddedKafkaRule = new EmbeddedKafkaRule(1, true, INPUT_TOPIC, OUTPUT_TOPIC);
+        producer.send(new ProducerRecord<>(TEST_TOPIC, 123, "my-test-value"));
 
-// 	public static EmbeddedKafkaBroker embeddedKafka = embeddedKafkaRule.getEmbeddedKafka();
+        ConsumerRecord<Integer, String> singleRecord = KafkaTestUtils.getSingleRecord(consumer, TEST_TOPIC);
+        assertNotNull(singleRecord);
+        assertEquals(singleRecord.key(), 123);
+        assertEquals(singleRecord.value(), "my-test-value");
 
-// 	private static KafkaTemplate<String, String> template;
+        consumer.close();
+        producer.close();
+    }
 
-// 	@Autowired
-// 	private KafkaProperties properties;
+    private Consumer<Integer, String> configureConsumer() {
+        Map<String, Object> consumerProps = KafkaTestUtils.consumerProps("group-id", "true", embeddedKafkaBroker);
+        consumerProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        Consumer<Integer, String> consumer = new DefaultKafkaConsumerFactory<Integer, String>(consumerProps)
+                .createConsumer();
+        consumer.subscribe(Collections.singleton(TEST_TOPIC));
+        return consumer;
+    }
 
-// 	private static Consumer<String, String> consumer;
-
-// 	@BeforeTestClass
-// 	public static void setup() {
-// 		System.setProperty("spring.kafka.bootstrap-servers", embeddedKafka.getBrokersAsString());
-
-// 		Map<String, Object> senderProps = KafkaTestUtils.producerProps(embeddedKafka);
-// 		senderProps.put("key.serializer", StringSerializer.class);
-// 		senderProps.put("value.serializer", StringSerializer.class);
-// 		DefaultKafkaProducerFactory<String, String> pf = new DefaultKafkaProducerFactory<>(senderProps);
-// 		template = new KafkaTemplate<>(pf, true);
-
-// 		Map<String, Object> consumerProps = KafkaTestUtils.consumerProps("group-id", "false", embeddedKafka);
-// 		consumerProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-// 		consumerProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-// 		consumerProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-// 		DefaultKafkaConsumerFactory<String, String> cf = new DefaultKafkaConsumerFactory<>(consumerProps);
-// 		consumer = cf.createConsumer();
-// 		embeddedKafka.consumeFromAnEmbeddedTopic(consumer, OUTPUT_TOPIC);
-// 	}
-
-// 	@AfterEach
-// 	public void tearDown() {
-// 		if (consumer != null){
-// 			consumer.close();
-// 		}
-// 	}
-
-// 	@Test
-// 	public void testSendReceive() {
-// 		template.send(INPUT_TOPIC, "foo");
-
-// 		Map<String, Object> configs = properties.buildConsumerProperties();
-// 		configs.put(ConsumerConfig.GROUP_ID_CONFIG, "test0544");
-// 		configs.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-
-// 		ConsumerRecord<String, String> cr = KafkaTestUtils.getSingleRecord(consumer, OUTPUT_TOPIC);
-
-// 		System.out.println(cr.value());
-
-// 		assertEquals(cr.value(), "FOO");
-// 	}
-
-// 	@SpringBootApplication
-// 	public static class ExampleAppNotWorkingFunctional {
-
-// 		public static void main(String[] args) {
-// 			SpringApplication.run(ExampleAppNotWorkingFunctional.class, args);
-// 		}
-
-// 		@Bean
-// 		public Function<KStream<String, String>, KStream<String, String>> toUpperCase (){
-// 			return in -> in.map((key, val) -> KeyValue.pair(key, val.toUpperCase()));
-// 		}
-// 	}
-// }
+    private Producer<Integer, String> configureProducer() {
+        Map<String, Object> producerProps = new HashMap<>(KafkaTestUtils.producerProps(embeddedKafkaBroker));
+        return new DefaultKafkaProducerFactory<Integer, String>(producerProps).createProducer();
+    }
+}
