@@ -27,8 +27,9 @@ A pipeline to process the IoT data, consists of 4 component.
 
 # Installation steps and running on docker
 Download and start the docker engine.
-Go to project root folder and run **docker-compose up**
-It will start: Iot event Producer, Iot event consumer and Iot api to query sensor data. Alondg with that it will start the 3 kafka brokers, Kafdrop on localhost 9000, and zookeper as shown below
+- Go to project root folder and run **docker-compose up**
+- It will start: Iot event Producer, Iot event consumer and Iot api to query sensor data. 
+- Along with that it will start the 3 kafka brokers, Kafdrop for Kafka Cluster Overview on localhost 9000, and zookeper as shown below
 
 <img width="1041" alt="Screenshot 2022-11-06 at 21 10 52" src="https://user-images.githubusercontent.com/12380793/200192742-1504572e-a621-4291-9f82-ca4ed47526e4.png">
 
