@@ -35,3 +35,6 @@ Download and start the docker engine.
 
 # Limitation
 - The startDateTime and endDateTime should be in YYYY-MM-DD or YYYY/MM/DD format now.This should be imporoved to support more formats.
+
+# API Documentation
+- api-docs folder holds the API specification for producer and secure webservice in YAML format
