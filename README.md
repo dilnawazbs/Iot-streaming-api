@@ -67,6 +67,9 @@ curl --location --request POST 'http://localhost:8080/publish-events' \
 
 Link to API specification in [YAML](https://github.com/dilnawazbs/Iot-streaming-api/blob/main/api-docs/iot-api-open-api.yaml) format.
 
-<img width="839" alt="Screenshot 2022-11-06 at 21 42 33" src="https://user-images.githubusercontent.com/12380793/200194057-f9e175ac-aa6a-48a9-9cb8-bd6003506610.png">
+<img width="824" alt="Screenshot 2022-11-06 at 21 50 14" src="https://user-images.githubusercontent.com/12380793/200194434-e7d7a219-4049-4c6e-ad9e-ab3dbbedac26.png">
 
-<img width="823" alt="Screenshot 2022-11-06 at 21 43 20" src="https://user-images.githubusercontent.com/12380793/200194095-262ca664-ec68-4d17-b0cb-99e2c6f1fc04.png">
+
+
+<img width="822" alt="Screenshot 2022-11-06 at 21 46 54" src="https://user-images.githubusercontent.com/12380793/200194461-604e5c56-2432-4e78-ba13-f907d2d90583.png">
+
