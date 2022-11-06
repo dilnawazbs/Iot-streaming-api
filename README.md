@@ -37,4 +37,4 @@ Download and start the docker engine.
 - The startDateTime and endDateTime should be in YYYY-MM-DD or YYYY/MM/DD format now.This should be imporoved to support more formats.
 
 # API Documentation
-- api-docs folder holds the API specification for producer and secure webservice in YAML format
+- [api-docs](https://github.com/dilnawazbs/Iot-streaming-api/tree/main/api-docs) folder holds the API specification for producer and secure webservice in [YAML](https://github.com/dilnawazbs/Iot-streaming-api/tree/main/api-docs) format
