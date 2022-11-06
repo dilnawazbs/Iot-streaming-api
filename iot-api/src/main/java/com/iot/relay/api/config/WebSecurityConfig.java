@@ -2,6 +2,7 @@ package com.iot.relay.api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -36,6 +37,7 @@ public class WebSecurityConfig {
         }
     
         @Bean
+        @Profile(value = {"!test"})
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http.cors().and().csrf().disable()
                      .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
@@ -45,6 +47,16 @@ public class WebSecurityConfig {
                     .anyRequest().authenticated();
     
             http.addFilterBefore(authenticationJwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+    
+            return http.build();
+        }
+
+        @Bean
+        @Profile(value = {"test"})
+        public SecurityFilterChain filterChainTest(HttpSecurity http) throws Exception {
+            http.csrf().disable()
+            // Permit all requests without authentication
+            .authorizeRequests().anyRequest().permitAll();
     
             return http.build();
         }

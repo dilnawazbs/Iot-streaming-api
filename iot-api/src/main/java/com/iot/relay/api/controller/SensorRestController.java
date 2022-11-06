@@ -2,6 +2,8 @@ package com.iot.relay.api.controller;
 
 import java.math.BigDecimal;
 import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,6 @@ import lombok.AllArgsConstructor;
 @RequestMapping("query/")
 @AllArgsConstructor
 public class SensorRestController {
-
 	private SensorOperationService sensorOperationService;
 
 	@Operation(summary = "Perform query operation on sensor data.")
@@ -36,5 +37,4 @@ public class SensorRestController {
 			@Valid QueryRequest queryDTO) throws Exception {
 		return new ResponseEntity<>(sensorOperationService.execute(operation, queryDTO), HttpStatus.OK);
 	}
-
 }

@@ -3,3 +3,6 @@ security:
     enabled: false
 jwt:
   secret: relaysecretcode
+spring:
+  profiles:
+    active: "test"
