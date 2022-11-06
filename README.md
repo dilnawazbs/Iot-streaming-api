@@ -110,31 +110,33 @@ Without JWT token could not access any of below APIs, user will get 401 error
 ### To find Minimum
 
 ```
-curl --location --request GET 'http://localhost:8082/query/min?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=HUMIDITY&clusterId=1'
+curl --location --request GET 'http://localhost:8082/query/min?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=TEMPERATURE&clusterId=1'
 --header "Authorization: Bearer << TOKEN FROM AUTHENTICATE API>>"
 ```
-<img width="971" alt="Screenshot 2022-11-06 at 22 03 55" src="https://user-images.githubusercontent.com/12380793/200195030-f5b88353-94d7-4333-91e8-e15af3910b16.png">
+<img width="975" alt="Screenshot 2022-11-06 at 22 14 00" src="https://user-images.githubusercontent.com/12380793/200195541-bcb10ba8-0696-4269-ac6f-4b033d6fc674.png">
 
 ### To find Maximum
 
 ```
-curl --location --request GET 'http://localhost:8082/query/max?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=HUMIDITY&clusterId=1'
+curl --location --request GET 'http://localhost:8082/query/max?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=TEMPERATURE&clusterId=1'
 --header "Authorization: Bearer << TOKEN FROM AUTHENTICATE API>>"
 ```
-<img width="972" alt="Screenshot 2022-11-06 at 22 05 25" src="https://user-images.githubusercontent.com/12380793/200195097-cd9d29fc-2b54-4871-890a-ee89a32bd536.png">
+<img width="972" alt="Screenshot 2022-11-06 at 22 15 24" src="https://user-images.githubusercontent.com/12380793/200195554-c5264e7f-61c0-4ef7-b820-c27b7669a433.png">
 
 ### To find Median
 
 ```
-curl --location --request GET 'http://localhost:8082/query/max?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=HUMIDITY&clusterId=1'
+curl --location --request GET 'http://localhost:8082/query/median?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=TEMPERATURE&clusterId=1'
 --header "Authorization: Bearer << TOKEN FROM AUTHENTICATE API>>"
 ```
-<img width="976" alt="Screenshot 2022-11-06 at 22 05 52" src="https://user-images.githubusercontent.com/12380793/200195114-d89d3df4-a759-470f-9eed-44e2e8701ea8.png">
+<img width="973" alt="Screenshot 2022-11-06 at 22 15 50" src="https://user-images.githubusercontent.com/12380793/200195565-a9744bb4-260a-4dda-9509-ce8fef7e27e3.png">
 
 ### To find Average
 
 ```
-curl --location --request GET 'http://localhost:8082/query/max?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=HUMIDITY&clusterId=1'
+curl --location --request GET 'http://localhost:8082/query/average?startDateTime=2022-11-05&endDateTime=2022-11-06&eventType=TEMPERATURE&clusterId=1'
 --header "Authorization: Bearer << TOKEN FROM AUTHENTICATE API>>"
 ```
-<img width="972" alt="Screenshot 2022-11-06 at 22 06 15" src="https://user-images.githubusercontent.com/12380793/200195134-1877a6c1-f39a-4629-a749-a9aa129d548d.png">
+
+<img width="970" alt="Screenshot 2022-11-06 at 22 16 19" src="https://user-images.githubusercontent.com/12380793/200195584-53ff3613-0679-4e78-a5c4-8a7c0c7c6359.png">
+
