@@ -18,7 +18,6 @@ import com.iot.relay.model.repo.UserDataRepositoryCustom;
 /**
  * User Repository class which store/fetch user details from DB
  *
- * @author Dilnawaz Sayyad
  */
 @Repository
 public class UserDataRepositoryImpl implements UserDataRepositoryCustom {

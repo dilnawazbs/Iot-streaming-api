@@ -23,7 +23,6 @@ import com.iot.relay.model.repo.SensorDataRepositoryCustom;
 /**
  * Repository class which have queries for all operations
  *
- * @author Dilnawaz Sayyad
  */
 @Repository
 public class SensorDataRepositoryCustomImpl implements SensorDataRepositoryCustom {

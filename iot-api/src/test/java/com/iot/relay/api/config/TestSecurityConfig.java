@@ -10,10 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class TestSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // Disable CSRF
-        httpSecurity.csrf().disable()
-                // Permit all requests without authentication
-                .authorizeRequests().anyRequest().permitAll();
+        httpSecurity.csrf().disable().authorizeRequests().anyRequest().permitAll();
     }
     
 }

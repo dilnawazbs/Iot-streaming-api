@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 /**
  * Controller to fetch sensor data from monogdb
  * 
- * @author dilnawaz sayyad
  */
 @RestController
 @RequestMapping("query/")

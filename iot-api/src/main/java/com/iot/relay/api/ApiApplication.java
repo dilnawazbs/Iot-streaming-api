@@ -8,8 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories("com.iot.relay.model.repo")
 public class ApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ApiApplication.class, args);
-	}
-
+  public static void main(String[] args) {
+    SpringApplication.run(ApiApplication.class, args);
+  }
 }
