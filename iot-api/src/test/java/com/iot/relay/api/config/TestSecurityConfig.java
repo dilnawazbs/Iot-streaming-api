@@ -17,3 +17,5 @@ public class TestSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     
 }
+
+

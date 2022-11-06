@@ -8,7 +8,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,13 +29,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
  * @author dilnawazan sayyad
  */
 @RestController
-@CrossOrigin
 public class UserController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
@@ -57,7 +59,7 @@ public class UserController {
 			@ApiResponse(responseCode = "400", description = "Invalid input. Login data are not correct format.") })
 	@RequestMapping(value = "/create/user", method = RequestMethod.POST)
 	public String createNewUser(@RequestBody UserData userData) throws Exception {
-		userDetailsService.save(userData);
+		userDetailsService.save(userData, passwordEncoder.encode(userData.getPassword()));
 		return "User created successfully";
 	}
 

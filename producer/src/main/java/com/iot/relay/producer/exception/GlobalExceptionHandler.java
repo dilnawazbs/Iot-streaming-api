@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -15,7 +14,6 @@ public class GlobalExceptionHandler {
   /**
    * This method returns a ResponseEntity for writing to the response with a message converter
    * @param ex the {@link Exception}
-   * @param request the {@link WebRequest}
    * @return {@link ErrorDetails} with a custom error details
    */
   @ExceptionHandler(Exception.class)
