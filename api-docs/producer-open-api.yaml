@@ -1,0 +1,55 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  description: Documentation of Iot sensor stream producer APIs v1.0
+  version: '1.0'
+servers:
+  - url: 'http://localhost:8080/'
+    description: Generated server url
+paths:
+  /publish-events:
+    post:
+      tags:
+        - iot-event-controller
+      description: Publishes the events to kafka broker
+      operationId: publishEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              maxItems: 10
+              minItems: 1
+              type: array
+              items:
+                $ref: '#/components/schemas/IotEventRequest'
+        required: true
+      responses:
+        '201':
+          description: Created
+components:
+  schemas:
+    IotEventRequest:
+      required:
+        - clusterId
+        - name
+        - type
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        total:
+          type: integer
+          format: int32
+        heartBeat:
+          maximum: 10
+          minimum: 1
+          type: integer
+          format: int32
+        clusterId:
+          type: integer
+          format: int64

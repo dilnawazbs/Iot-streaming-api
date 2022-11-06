@@ -54,9 +54,7 @@ public class WebSecurityConfig {
         @Bean
         @Profile(value = {"test"})
         public SecurityFilterChain filterChainTest(HttpSecurity http) throws Exception {
-            http.csrf().disable()
-            // Permit all requests without authentication
-            .authorizeRequests().anyRequest().permitAll();
+            http.csrf().disable().authorizeRequests().anyRequest().permitAll();
     
             return http.build();
         }

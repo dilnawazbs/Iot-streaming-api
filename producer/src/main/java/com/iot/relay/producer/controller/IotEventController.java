@@ -3,6 +3,7 @@ package com.iot.relay.producer.controller;
 import com.iot.relay.producer.controller.request.IotEventRequest;
 import com.iot.relay.producer.service.IotEventService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class IotEventController {
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
+  @Operation(description = "Publishes the events to kafka broker")
   public Mono<Void> publishEvents(@Size(min = 1, max = 10, message = "Check the limit of messages") @RequestBody List<@Valid IotEventRequest> request) {
     iotEventService.publishEvents(request)
     .doOnSubscribe(subscription -> log.info("Received the iot event {}", request))
