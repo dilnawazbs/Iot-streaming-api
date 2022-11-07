@@ -19,6 +19,6 @@
 		<module>iot-api</module>
 		<module>iot-consumer</module>
 		<module>iot-model</module>
-		<module>producer</module>
+		<module>iot-producer</module>
 	</modules>
 </project>

@@ -8,7 +8,7 @@ RUN mvn -f /home/app/pom.xml clean package spring-boot:repackage
 
 FROM openjdk:11-jre-slim
 
-COPY producer/target/producer-0.0.1-SNAPSHOT.jar springBootDocker.jar
+COPY iot-producer/target/producer-0.0.1-SNAPSHOT.jar springBootDocker.jar
 
 EXPOSE 8080
 
