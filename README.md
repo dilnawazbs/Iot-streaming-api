@@ -28,13 +28,17 @@ A pipeline to process the IoT data, consists of 4 component.
 # Installation steps and running on docker
 Download and start the docker engine.
 - Go to project root folder and run **docker-compose up**
-- It will start: Iot event Producer, Iot event consumer and Iot api to query sensor data. 
-- Along with that it will start the 3 kafka brokers, Kafdrop for Kafka Cluster Overview on localhost 9000, and zookeper as shown below
+- It will run images of kafka_0-1, kafka_1-1, kafka_2-1, kafdrop and mongo.
+- **Note:** Run the iot-producer, iot-consumer and iot-api from the terminal. And not from docker. 
+- Run via terminal, Navigate to each of the project iot-producer, iot-consumer and iot-api and run  **mvn spring-boot:run**  command on each of project to start producer, consumer and iot-api application. Now the consumer and producer are connected.
+- This will connect the producer and consumer with Kafka broker.
 
-<img width="1041" alt="Screenshot 2022-11-06 at 21 10 52" src="https://user-images.githubusercontent.com/12380793/200192742-1504572e-a621-4291-9f82-ca4ed47526e4.png">
+ <img width="1103" alt="Screenshot 2022-11-07 at 19 50 34" src="https://user-images.githubusercontent.com/12380793/200390898-3d87bb87-87fb-48ee-b5e3-ddfbee9ceb0a.png">
+
 
 # Limitation
 - The startDateTime and endDateTime should be in YYYY-MM-DD or YYYY/MM/DD format now.This should be imporoved to support more formats.
+- Producer, consumer and iot-api application needs to be run via terminal. There is an issue with connecting with docker which will be improved.
 
 # API Documentation
 - [api-docs](https://github.com/dilnawazbs/Iot-streaming-api/tree/main/api-docs) folder holds the API specification for producer and secure webservice in [YAML](https://github.com/dilnawazbs/Iot-streaming-api/tree/main/api-docs) format.
