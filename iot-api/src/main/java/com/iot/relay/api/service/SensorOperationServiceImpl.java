@@ -26,18 +26,16 @@ public class SensorOperationServiceImpl implements SensorOperationService {
    */
   @Override
   public BigDecimal execute(String operationType, QueryRequest request) {
-    if (
-      SensorConstant.SENSOR_OPERATION_AVERAGE.equalsIgnoreCase(operationType)
-    ) return fetchAverage(request); else if (
-      SensorConstant.SENSOR_OPERATION_MAXIMUM.equalsIgnoreCase(operationType)
-    ) return fetchMaximum(request); else if (
-      SensorConstant.SENSOR_OPERATION_MEDIAN.equalsIgnoreCase(operationType)
-    ) return fetchMedian(request); else if (
-      SensorConstant.SENSOR_OPERATION_MINIMUM.equalsIgnoreCase(operationType)
-    ) return fetchMinimum(request);
-    throw new SensorCustomException(
-      "Unsupported operation. Type = " + operationType
-    );
+    if (SensorConstant.SENSOR_OPERATION_AVERAGE.equalsIgnoreCase(operationType)) {
+      return fetchAverage(request);
+    } else if (SensorConstant.SENSOR_OPERATION_MAXIMUM.equalsIgnoreCase(operationType)) {
+      return fetchMaximum(request); 
+    } else if (SensorConstant.SENSOR_OPERATION_MEDIAN.equalsIgnoreCase(operationType)) {
+      return fetchMedian(request);
+    } else if (SensorConstant.SENSOR_OPERATION_MINIMUM.equalsIgnoreCase(operationType)) {
+      return fetchMinimum(request);
+    } 
+    throw new SensorCustomException( "Unsupported operation. Type = " + operationType);
   }
 
   @Override
@@ -46,9 +44,7 @@ public class SensorOperationServiceImpl implements SensorOperationService {
     return sensorDataRepository.findMinValueByClusterIdAndTypeAndTimestamp(
       request.getClusterId(),
       request.getEventType(),
-      ApplicationUtils.convertStringToOffsetDateTime(
-        request.getStartDateTime()
-      ),
+      ApplicationUtils.convertStringToOffsetDateTime(request.getStartDateTime()),
       ApplicationUtils.convertStringToOffsetDateTime(request.getEndDateTime())
     );
   }
@@ -59,9 +55,7 @@ public class SensorOperationServiceImpl implements SensorOperationService {
     return sensorDataRepository.findAvgValueByClusterIdAndTypeAndTimestamp(
       request.getClusterId(),
       request.getEventType(),
-      ApplicationUtils.convertStringToOffsetDateTime(
-        request.getStartDateTime()
-      ),
+      ApplicationUtils.convertStringToOffsetDateTime(request.getStartDateTime()),
       ApplicationUtils.convertStringToOffsetDateTime(request.getEndDateTime())
     );
   }
@@ -72,9 +66,7 @@ public class SensorOperationServiceImpl implements SensorOperationService {
     return sensorDataRepository.findMaxValueByClusterIdAndTypeAndTimestamp(
       request.getClusterId(),
       request.getEventType(),
-      ApplicationUtils.convertStringToOffsetDateTime(
-        request.getStartDateTime()
-      ),
+      ApplicationUtils.convertStringToOffsetDateTime(request.getStartDateTime()),
       ApplicationUtils.convertStringToOffsetDateTime(request.getEndDateTime())
     );
   }
@@ -85,9 +77,7 @@ public class SensorOperationServiceImpl implements SensorOperationService {
     return sensorDataRepository.findMedianValueByClusterIdAndTypeAndTimestamp(
       request.getClusterId(),
       request.getEventType(),
-      ApplicationUtils.convertStringToOffsetDateTime(
-        request.getStartDateTime()
-      ),
+      ApplicationUtils.convertStringToOffsetDateTime(request.getStartDateTime()),
       ApplicationUtils.convertStringToOffsetDateTime(request.getEndDateTime())
     );
   }

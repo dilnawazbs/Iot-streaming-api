@@ -9,11 +9,11 @@ import com.iot.relay.model.model.SensorDataEntity;
 @Repository
 public interface SensorDataRepository extends MongoRepository<SensorDataEntity, String>, SensorDataRepositoryCustom {
   @Aggregation(pipeline = { "{$group: { _id: '', total: {$max: $value }}}" })
-  public double max();
+  double max();
 
   @Aggregation(pipeline = { "{$group: { _id: '', total: {$min: $value }}}" })
-  public double min();
+  double min();
 
   @Aggregation(pipeline = { "{$group: { _id: '', total: {$avg: $value }}}" })
-  public double avg();
+  double avg();
 }

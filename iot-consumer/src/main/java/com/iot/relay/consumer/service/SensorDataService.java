@@ -22,9 +22,7 @@ public class SensorDataService {
    * @param sensorDataEntity
    */
   public void save(SensorData sensorData) {
-    SensorDataEntity sensorDataEntity = sensorDataMapper.fromEventToEntity(
-      sensorData
-    );
+    SensorDataEntity sensorDataEntity = sensorDataMapper.fromEventToEntity(sensorData);
     sensorDataRepository.save(sensorDataEntity);
   }
 }

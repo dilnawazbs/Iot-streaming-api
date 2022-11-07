@@ -33,7 +33,7 @@ public class SensorRestController {
 			@ApiResponse(responseCode = "416", description = "Data for the requested range is not found") })
 	@GetMapping(value = "{operation}")
 	public ResponseEntity<BigDecimal> performOperation(@PathVariable("operation") String operation,
-			@Valid QueryRequest queryDTO) throws Exception {
+			@Valid QueryRequest queryDTO) {
 		return new ResponseEntity<>(sensorOperationService.execute(operation, queryDTO), HttpStatus.OK);
 	}
 }

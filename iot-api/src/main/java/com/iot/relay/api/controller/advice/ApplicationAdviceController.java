@@ -1,4 +1,4 @@
-package com.iot.relay.api.advice;
+package com.iot.relay.api.controller.advice;
 
 import java.io.IOException;
 import java.util.HashMap;

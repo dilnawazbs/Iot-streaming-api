@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 /**
  *
  * Test class for link
- * {@link SensorDataOperationService#execute(String, com.relay.iot.services.api.request.QueryRequest)}
+ * {@link SensorOperationService#execute(String, com.relay.iot.services.api.request.QueryRequest)}
  *
  */
 @ExtendWith(MockitoExtension.class)

@@ -36,7 +36,6 @@ public class IotEventController {
   @Operation(description = "Publishes the events to kafka broker")
   public Mono<Void> publishEvents(@Size(min = 1, max = 10, message = "Check the limit of messages") @RequestBody List<@Valid IotEventRequest> request) {
     iotEventService.publishEvents(request)
-    .doOnSubscribe(subscription -> log.info("Received the iot event {}", request))
     .subscribe(null, error -> log.error("Failed to process iot event {} with error {}" ,request, error.getMessage()),
                         () -> log.info("event {} has processed", request));
       return Mono.empty();
